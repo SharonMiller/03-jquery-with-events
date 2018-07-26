@@ -92,8 +92,17 @@ articleView.setTeasers = function () {
 
   $('#articles').on('click', 'a', function (event) {
     event.preventDefault();
-    $(this).prev().children('*:nth-of-type(n+2)').slideDown(500);
-    $(this).hide();
+    $(this).prev().children('*:nth-of-type(n+2)').slideToggle(500);
+    if ($(this).text() === 'Show less') {
+
+      $(this).text('Read on');
+
+    } else {
+
+      $(this).text('Show less');
+
+    }
+
   });
 
   // TODO: Add an event handler to reveal all the hidden elements, when the .read-on link is clicked. You can go ahead and hide the "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
