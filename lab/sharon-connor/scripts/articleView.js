@@ -44,7 +44,7 @@ articleView.handleAuthorFilter = function () {
       $(`[data-author="${$(this).val()}"`).fadeIn(750);
 
     } else {
-      // TODO: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template.
+      // TODO: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template. DONE
       $('.template').siblings().fadeIn(750);
     }
     $('#category-filter').val('');
@@ -56,6 +56,17 @@ articleView.handleCategoryFilter = function () {
   // When an option with a value is selected, hide all the articles, then reveal the matches.
   // When the blank (default) option is selected, show all the articles, except for the template.
   // Be sure to reset the #author-filter while you are at it!
+  $('#category-filter').on('change', function(){
+
+    if($(this).val()){
+
+      $('article').hide();
+      $(`[data-category="${$(this).val()}"`).fadeIn(750);
+
+    } else {
+      $('.template').siblings().fadeIn(750);
+    }
+  });
 
 };
 
@@ -80,4 +91,5 @@ articleView.setTeasers = function () {
 $(document).ready(function () {
   articleView.populateFilters();
   articleView.handleAuthorFilter();
+  articleView.handleCategoryFilter();
 })
