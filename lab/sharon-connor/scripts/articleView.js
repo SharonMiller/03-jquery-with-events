@@ -56,9 +56,9 @@ articleView.handleCategoryFilter = function () {
   // When an option with a value is selected, hide all the articles, then reveal the matches.
   // When the blank (default) option is selected, show all the articles, except for the template.
   // Be sure to reset the #author-filter while you are at it!
-  $('#category-filter').on('change', function(){
+  $('#category-filter').on('change', function () {
 
-    if($(this).val()){
+    if ($(this).val()) {
 
       $('article').hide();
       $(`[data-category="${$(this).val()}"]`).fadeIn(750);
@@ -74,9 +74,9 @@ articleView.handleMainNav = function () {
   // TODO: Add an event handler to nav elements that will power the Tabs feature.
   // Clicking any .tab element should hide all the .tab-content sections, and then reveal the single .tab-content section that is associated with the clicked .tab element.
   // So: You need to dynamically build a selector string with the correct ID, based on the data available to you on the .tab element that was clicked. DONE
-  
-  $('.tab').on('click', function() {
-    
+
+  $('.tab').on('click', function () {
+
     $('.tab-content').hide();
     $(`#${$(this).data('content')}`).fadeIn(750);
 
@@ -90,6 +90,12 @@ articleView.setTeasers = function () {
   // REVIEW: Hide elements beyond the first 2 in any article body.
   $('.article-body *:nth-of-type(n+2)').hide();
 
+  $('#articles').on('click', 'a', function (event) {
+    event.preventDefault();
+    $(this).prev().children('*:nth-of-type(n+2)').slideDown(500);
+    $(this).hide();
+  });
+
   // TODO: Add an event handler to reveal all the hidden elements, when the .read-on link is clicked. You can go ahead and hide the "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
   // Ideally, we'd attach this as just one event handler on the #articles section, and let it process (in other words... delegate) any .read-on clicks that happen within child nodes.
 };
@@ -100,4 +106,5 @@ $(document).ready(function () {
   articleView.handleAuthorFilter();
   articleView.handleCategoryFilter();
   articleView.handleMainNav();
+  articleView.setTeasers();
 })
